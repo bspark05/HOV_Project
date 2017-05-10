@@ -10,14 +10,14 @@ requests, bs4, time, datetime
 ### class PeMS(*self, username, pw*)
 : Initialization of the webbrowser session and connection to the PeMS
 
-Parameters | Type |
+Parameters | |
 ------|:------
 **username**|*string*
  || Username of a PeMS account for login
 **pw**|*string*
  || Password for the username
  | |
-Returns: | |
+Returns | |
 **session**|*requests.sessions.Session* 
  || The logged-in webbrowser session which would be maintained until the finished the script
 
