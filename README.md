@@ -13,9 +13,9 @@ requests, bs4, time, datetime
 Parameters | Type |
 ------|:------
 **username**|*string*
- | Username of a PeMS account for login
+ || Username of a PeMS account for login
 **pw**|*string*
- | Password for the username
+ || Password for the username
  | |
 Returns: | |
 **session**|*requests.sessions.Session* 
