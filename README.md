@@ -84,7 +84,7 @@ pw|*string*
 44| [Value,  'Occupancy = 0 (Card Off)',       44]
 
 ### class AADT(*self, session, id, startDate='20160101', endDate='20161231'*)
- : Average Annual Daily Traffic (AADT) of a specific station in a certain time period (Default period - 20160101 ~ 20161231)
+ : Average Annual Daily Traffic (AADT) of a specific station during a certain time period (Default period - 20160101 ~ 20161231)
  
 **Parameter** | |
 ------|:------
@@ -98,7 +98,7 @@ endDate|*string*
  || end date of the time range (YYYYMMDD)
  ||
 **Return**| |
-0| [Value,  'Station ID',                      0]
+0| [Value,  'Station ID',                  0]
  ||## AADT
 1| [Value,  'Starting Month',              1]
 2| [Value,  'Fwy',                         2]
@@ -117,3 +117,32 @@ endDate|*string*
 15|[Value,  'Mod. Prov. AASHTO',           15]
 16|[Value,  '% Data Used',                 16]
 17|[Value,  'K',                           17]
+
+### class CHPIncidents(*self, session, fwy, direction, start_AbsPm, end_AbsPm, CHPtype='accident', startDate='20160101', endDate='20161231'*)
+ : California Highway Patrol Incidents data based on absolute postmile of the Highway during a specific time perioud.(Default incident - 'accident'/ Default period - 20160101 ~ 20161231)
+ 
+**Parameter** | |
+------|:------
+session|*requests.sessions.Session* 
+ ||Username of a PeMS account for login
+fwy|*string*
+ || Station ID of interest
+direction|*string*
+ || Direction of Highway
+start_AbsPm|*float*
+ || Starting absolute postmile of a road segment
+end_AbsPm|*float*
+ || Ending absolute postmile of a road segment
+CHPtype|*string*
+ || Type of incidents (one among 'accident', 'breakdown', 'congestion', 'hazard', 'police', 'weather', 'other')
+startDate|*string*
+ || starting date of the time range (YYYYMMDD)
+endDate|*string*
+ || end date of the time range (YYYYMMDD)
+ ||
+**Return**| |
+0| [Value,  'fwy',                           0]
+1| [Value,  'direction',                     1]
+2| [Value,  'start_AbsPm',                   2]
+3| [Value,  'end_AbsPm',                     3]
+4| [Value,  str(CHPtype),                    4]
