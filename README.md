@@ -33,7 +33,7 @@ pw|*string*
  ||
 **Return**| |
 0| [Value,  'Station ID',                      0]
- |## Roadway Information (from TSN)
+ ||## Roadway Information (from TSN)
 1| [Value,  'Road Width',                      1]
 2| [Value,  'Lane Width',                      2]
 3| [Value,  'Inner Shoulder Width',            3]
@@ -49,7 +49,7 @@ pw|*string*
 13|[Value,  'Barrier',                         13]
 14|[Value,  'Surface',                         14]
 15|[Value,  'Roadway Use',                     15]
-  |## Change Log
+  ||## Change Log
 16| [None,  'Date',                           16]
 17| [None,  'Status',                         17]
 18| [None,  'Name',                           18]
@@ -59,7 +59,7 @@ pw|*string*
 22| [None,  'Length',                         22]
 23| [None,  'Lat',                            23]
 24| [None,  'Lng',                            24]
-  |## Staion Details
+  ||## Staion Details
 25| [None,  'Aliases',                        25]
 26| [None,  'LDS',                            26]
 27| [None,  'Owner',                          27]
@@ -68,12 +68,12 @@ pw|*string*
 30| [None,  'Speeds',                         30]
 31| [None,  'Max Cap.',                       31]
 32| [None,  'Vehicle Classification',         32]
-  |## Lane Detection
+  ||## Lane Detection
 33| [None,  'Lane',                           33]
 34| [None,  'Slot',                           34]
 35| [None,  'Sensor Tech',                    35]
 36| [None,  'Type',                           36]
-  |## Diagnostics
+  ||## Diagnostics
 37| [None,  'Threshold Set',                  37]
 38| [None,  'Flow = 0, Occ > 0 (Intermittent)',38]
 39| [None,  'High Flow Threshold',            39]
