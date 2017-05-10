@@ -1,4 +1,4 @@
-# HOV_Project
+# UCI_HOV_Project
 
 ## Description
 This library is written in Python and intended to collect various Highway data on Caltrans Performance Measurement System (PeMS).
