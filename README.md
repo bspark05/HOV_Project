@@ -19,7 +19,7 @@ Parameters | Type |
  | |
 Returns: | |
 **session**|*requests.sessions.Session* 
- | The logged-in webbrowser session which would be maintained until the finished the script
+ || The logged-in webbrowser session which would be maintained until the finished the script
 
 ### class ChangeLog(*self, session, id*)
  : Stations (sensors on Highway) and the corresponding highway segments information
