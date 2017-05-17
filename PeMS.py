@@ -19,7 +19,7 @@ class PeMS:
                   'password':'javawm',
                   'submit':'login',}
         r=session.post(self.url, data=values)
-        return session
+        return r, session
     
 class ChangeLog:
     def __init__(self, session, id):
@@ -138,8 +138,9 @@ class ChangeLog:
 class AADT:
     def __init__(self, session, id, startDate='20160101', endDate='20161231'):
         self.id = str(id)
-        sDate = datetime.date(startDate[:3], startDate[4:5], startDate[6:])
-        eDate = datetime.date(endDate[:3], endDate[4:5], endDate[6:])
+        sDate = datetime.date(int(startDate[:4]), int(startDate[4:6]), int(startDate[6:]))
+        eDate = datetime.date(int(endDate[:4]), int(endDate[4:6]), int(endDate[6:]))
+
         sUnixtime = str(int(time.mktime(sDate.timetuple())))
         eUnixtime = str(int(time.mktime(eDate.timetuple())))
 
@@ -200,8 +201,8 @@ class CHPIncidents:
         self.end = end_AbsPm
         self.CHPtype = CHPtype
         
-        sDate = datetime.date(startDate[:3], startDate[4:5], startDate[6:])
-        eDate = datetime.date(endDate[:3], endDate[4:5], endDate[6:])
+        sDate = datetime.date(int(startDate[:4]), int(startDate[4:6]), int(startDate[6:]))
+        eDate = datetime.date(int(endDate[:4]), int(endDate[4:6]), int(endDate[6:]))
         sUnixtime = str(int(time.mktime(sDate.timetuple())))
         eUnixtime = str(int(time.mktime(eDate.timetuple())))
         
@@ -243,5 +244,22 @@ class CHPIncidents:
         td = trs[-1].findAll('td')[-1]
         self.attrs[4][0] = str(td.string)
             
-            
-                
+class RawData:
+    def __init__(self, session, id, startTime, endTime, quantity, granularity):
+        # Time YYYYMMDDHHMM
+        sTime = datetime.datetime(int(startTime[:4]), int(startTime[4:6]), int(startTime[6:8]), int(startTime[8:10]), int(startTime[10:]))
+        eTime = datetime.datetime(int(endTime[:4]), int(endTime[4:6]), int(endTime[6:8]), int(endTime[8:10]), int(endTime[10:]))
+        
+        sUnixtime = str(int(time.mktime(sTime.timetuple())) - 25200)
+        eUnixtime = str(int(time.mktime(eTime.timetuple())) - 25200)
+        
+        self.urlRawData = "http://pems.dot.ca.gov/?report_form=1&dnode=VDS&content=detector_health&tab=dh_raw&export=&station_id="+id+"&s_time_id="+sUnixtime+"&e_time_id="+eUnixtime+"&lanes="+id+"-1&q="+quantity+"&q2=&gn="+granularity+"&html.x=34&html.y=6"
+        # flow / nflow / occ / gspeed / speed_not_used
+        # sec / 5min / 15min / hour
+        
+        r=session.get(self.urlRawData)
+        soup = BeautifulSoup(r.content,"lxml")
+        
+        self.rd = soup.findAll('table', attrs={"class": "inlayTable"})[0]
+        
+        

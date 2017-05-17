@@ -57,11 +57,10 @@ if __name__ == '__main__':
 #         print rowList[0][0]
 #         ex.excelWriteOnExistingFile("peMS_Accident_test.xlsx", "Sheet1", 'A', rowList)
       
-            
     pems = pms.PeMS()
-    session = pems.initSession()
+    r, session = pems.initSession()
     print "start!"
-    
+
 #     ##ChangeLog##
 #     idList = idList("peMS_ID_Mainline.xlsx", "LA", startRowNum=2)
 #     print idList
@@ -82,11 +81,14 @@ if __name__ == '__main__':
 #         print rowList[0][4]        
 #         ex.excelWriteOnExistingFile("peMS_AADT_Mainline.xlsx", "LA", 'A', rowList)
 
-    ##Incidents##
-    idList = idList4CHP("peMS_Incidents_ID_Mainline.xlsx", "OC", startRowNum=2)
-    for row in idList:
-        chp = pms.CHPIncidents(session, row[0], row[1], row[3], row[4], row[5], row[6], "accident")
-        rowList = rowtoList(chp)
-        
-        print rowList[0][0]
-        ex.excelWriteOnExistingFile("peMS_Incidents_Accidents_Mainline.xlsx", "OC", 'A', rowList)
+#     ##Incidents##
+#     idList = idList4CHP("peMS_Incidents_ID_Mainline.xlsx", "OC", startRowNum=2)
+#     for row in idList:
+#         chp = pms.CHPIncidents(session, row[0], row[1], row[3], row[4], row[5], row[6], "accident")
+#         rowList = rowtoList(chp)
+#         
+#         print rowList[0][0]
+#         ex.excelWriteOnExistingFile("peMS_Incidents_Accidents_Mainline.xlsx", "OC", 'A', rowList)
+
+    ## RawData
+    rd = pms.RawData(session, '1204935', '201605110700', '201605110900', 'flow', 'sec')
