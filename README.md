@@ -26,9 +26,9 @@ requests, bs4, time, datetime
 >import PeMS as pms
 > 
 >pems = pms.PeMS()
-
+>
 >r, session = pems.initSession("PeMS account", "your password")
-
+>
 >print "start!"
 
 ### class ChangeLog(*self, session, id*)
