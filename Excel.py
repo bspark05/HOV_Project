@@ -20,7 +20,7 @@ def excelRead(filepath, sheetname):
     
     return result
 
-def excelWriteOnExistingFile(filepath, sheetname, startCol, insert):
+def excelWriteOnExistingFileCol(filepath, sheetname, startRow, insert):
     # insert - double list [ [], [] , [], ...]
     
     wb = xlrd.open_workbook(filepath)
@@ -29,6 +29,41 @@ def excelWriteOnExistingFile(filepath, sheetname, startCol, insert):
     workbook = openpyxl.load_workbook(filepath)
     worksheet = workbook.active
     
+    colLen = ws.ncols
+    
+
+    row = startRow    
+    for lst in insert:
+        indCol = colLen+1+64
+        for attr in lst:
+            col = indCol
+            
+            octave = 0
+            if col > 90:
+                octave += 1
+                col -= 26
+            octaveChr = ''
+            if octave > 0:
+                octaveChr = chr(64+octave)
+            
+            try:
+                worksheet[octaveChr+chr(col)+str(row)] = attr
+            except(TypeError):
+                print ('Type Error - '+str(indCol))
+            
+            indCol+=1
+        row+=1
+    workbook.save(filepath)
+    print('saved successfully in existing file!') 
+    
+def excelWriteOnExistingFile(filepath, sheetname, startCol, insert):
+    # insert - double list [ [], [] , [], ...]
+    
+    wb = xlrd.open_workbook(filepath)
+    ws = wb.sheet_by_name(sheetname)
+    
+    workbook = openpyxl.load_workbook(filepath)
+    worksheet = workbook.active
     
     rowLen = ws.nrows
     
@@ -86,4 +121,6 @@ def excelWriteNewFile(filepath, sheetname, insertList):
         
     wb.save(filepath)
     print('saved successfully in a new file!')
+    
+
     

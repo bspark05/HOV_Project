@@ -259,7 +259,54 @@ class RawData:
         
         r=session.get(self.urlRawData)
         soup = BeautifulSoup(r.content,"lxml")
+        self.rd = soup.findAll('table', attrs={"class": "inlayTable"})
         
-        self.rd = soup.findAll('table', attrs={"class": "inlayTable"})[0]
+        self.attrs = {
+                      0: [None,  'result list',                      0],
+                      }
+        
+        self.rawData()
+    
+    def __getitem__(self, key):
+        if key in self.attrs:
+            return self.attrs[key][0]
+    
+    def __setitem__(self, key, item):
+        if key in self.attrs:
+            self.attrs[key][0] = item
+            
+    def rawData(self):
+        raw = []
+        table = self.rd[0]
+        trs = table.findAll('tr')
+        
+        ## get the first row - station id
+        th = trs[0].findAll('th')
+        thlist = []
+        ind=0
+        while ind < len(th):
+            thlist.append(str(th[ind].text))
+            ind+=1
+        raw.append(thlist)
+        
+        ## get records
+        for record in trs[1:]:
+            tds = record.findAll('td')
+            ind=0
+            recordList = []
+            while ind < len(tds):
+                recordList.append(str(tds[ind].text))
+                ind+=1
+            raw.append(recordList)
+        
+        self.attrs[0][0] = raw
+        
+                         
+                
+            
+        
+
+            
+        
         
         
