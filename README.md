@@ -21,6 +21,13 @@ requests, bs4, time, datetime
   session|*requests.sessions.Session* 
    || The logged-in webbrowser session which would be maintained until the finished the script
 
+- example of log-in process
+import PeMS as pms
+
+pems = pms.PeMS()
+r, session = pems.initSession("PeMS account", "your password")
+print "start!"
+
 ### class ChangeLog(*self, session, id*)
  : Stations (sensors on Highway) and the corresponding highway segments information
  
