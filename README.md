@@ -9,17 +9,17 @@ requests, bs4, time, datetime
 ## Class List
 ### class PeMS(*self, username, pw*)
 : Initialization of the webbrowser session and connection to the PeMS
-
-**Parameter** | |
-------|:------
-username|*string*
- || Username of a PeMS account for login
-pw|*string*
- || Password for the username
- ||
-**Return** | |
-session|*requests.sessions.Session* 
- || The logged-in webbrowser session which would be maintained until the finished the script
+  ### function initSession(username, pw)
+  **Parameter of the function** | |
+  ------|:------
+  username|*string*
+   || Username of a PeMS account for login
+  pw|*string*
+   || Password for the username
+   ||
+  **Return** | |
+  session|*requests.sessions.Session* 
+   || The logged-in webbrowser session which would be maintained until the finished the script
 
 ### class ChangeLog(*self, session, id*)
  : Stations (sensors on Highway) and the corresponding highway segments information
