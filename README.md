@@ -9,7 +9,7 @@ requests, bs4, time, datetime
 ## Class List
 ### class PeMS(*self, username, pw*)
 : Initialization of the webbrowser session and connection to the PeMS
-  ### function initSession(username, pw)
+  #### function initSession(username, pw)
   **Parameter of the function** | |
   ------|:------
   username|*string*
