@@ -58,18 +58,18 @@ if __name__ == '__main__':
 #         ex.excelWriteOnExistingFile("peMS_Accident_test.xlsx", "Sheet1", 'A', rowList)
       
     pems = pms.PeMS()
-    r, session = pems.initSession()
+    r, session = pems.initSession("bumsubp@uci.edu", "javawm")
     print "start!"
 
-#     ##ChangeLog##
-#     idList = idList("peMS_ID_Mainline.xlsx", "LA", startRowNum=2)
-#     print idList
-#     for stationID in idList:
-#         cl = pms.ChangeLog(session, stationID)
-#         rowList = rowtoList(cl)
-#           
-#         print rowList[0][0]        
-#         ex.excelWriteOnExistingFile("peMS_Station_Mainline.xlsx", "LA", 'A', rowList)
+    ##ChangeLog##
+    idList = idList("test.xlsx", "Sheet1", startRowNum=2)
+    print idList
+    for stationID in idList:
+        cl = pms.ChangeLog(session, stationID)
+        rowList = rowtoList(cl)
+           
+        print rowList[0][0]        
+        ex.excelWriteOnExistingFile("test_changelog.xlsx", "Sheet1", 'A', rowList)
 
 #     ##AADT##
 #     idList = idList("peMS_ID_Mainline.xlsx", "LA", startRowNum=2)

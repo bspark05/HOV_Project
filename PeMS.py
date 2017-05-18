@@ -13,10 +13,10 @@ class PeMS:
     def __init__(self):
         self.url = 'http://pems.dot.ca.gov/'
         
-    def initSession(self):
+    def initSession(self, id, pw):
         session = requests.session()
-        values = {'username' : 'bumsubp@uci.edu',
-                  'password':'javawm',
+        values = {'username' : id,
+                  'password':pw,
                   'submit':'login',}
         r=session.post(self.url, data=values)
         return r, session
