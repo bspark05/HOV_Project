@@ -61,15 +61,15 @@ if __name__ == '__main__':
     r, session = pems.initSession("bumsubp@uci.edu", "javawm")
     print "start!"
 
-    ##ChangeLog##
-    idList = idList("test.xlsx", "Sheet1", startRowNum=2)
-    print idList
-    for stationID in idList:
-        cl = pms.ChangeLog(session, stationID)
-        rowList = rowtoList(cl)
-           
-        print rowList[0][0]        
-        ex.excelWriteOnExistingFile("test_changelog.xlsx", "Sheet1", 'A', rowList)
+#     ##ChangeLog##
+#     idList = idList("test.xlsx", "Sheet1", startRowNum=2)
+#     print idList
+#     for stationID in idList:
+#         cl = pms.ChangeLog(session, stationID)
+#         rowList = rowtoList(cl)
+#            
+#         print rowList[0][0]        
+#         ex.excelWriteOnExistingFile("test_changelog.xlsx", "Sheet1", 'A', rowList)
 
 #     ##AADT##
 #     idList = idList("peMS_ID_Mainline.xlsx", "LA", startRowNum=2)
@@ -91,4 +91,9 @@ if __name__ == '__main__':
 #         ex.excelWriteOnExistingFile("peMS_Incidents_Accidents_Mainline.xlsx", "OC", 'A', rowList)
 
     ## RawData
-    rd = pms.RawData(session, '1204935', '201605110700', '201605110900', 'flow', 'sec')
+    idList = idList("test.xlsx", "Sheet1", startRowNum=2)
+    print idList
+    for stationID in idList:
+        rd = pms.RawData(session, stationID, "201705100700", "201705110900", "flow", "sec")
+        rdList = rd[0]
+        ex.excelWriteOnExistingFileCol("test2.xlsx", "Sheet1", 1, rdList)
