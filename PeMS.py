@@ -262,4 +262,53 @@ class RawData:
         
         self.rd = soup.findAll('table', attrs={"class": "inlayTable"})[0]
         
+class TimeSeries:
+    def __init__(self, session, id, startTime, endTime, quantity, granularity):
+        self.id = str(id)
+        # Time YYYYMMDDHHMM
+        sTime = datetime.datetime(int(startTime[:4]), int(startTime[4:6]), int(startTime[6:8]), int(startTime[8:10]), int(startTime[10:]))
+        eTime = datetime.datetime(int(endTime[:4]), int(endTime[4:6]), int(endTime[6:8]), int(endTime[8:10]), int(endTime[10:]))
         
+        sUnixtime = str(int(time.mktime(sTime.timetuple())) - 28800)
+        eUnixtime = str(int(time.mktime(eTime.timetuple())) - 28800)
+        
+        self.urlTimeSeries = "http://pems.dot.ca.gov/?report_form=1&dnode=VDS&content=loops&tab=det_timeseries&export=&station_id="+id+"&s_time_id="+sUnixtime+"&e_time_id="+eUnixtime+"&tod=all&tod_from=0&tod_to=0&dow_0=on&dow_1=on&dow_2=on&dow_3=on&dow_4=on&dow_5=on&dow_6=on&holidays=on&q="+quantity+"&q2=&gn="+granularity+"&lane1=on&html.x=60&html.y=11"
+        # flow / occ / speed /truck_flow / truck_prop / vmt / vht / q / tti / truck_vmt / truck_vht / del_35 / del_40 / del_45 / del_50 / del_55 / del_60 / lost_prod_35 / lost_prod_40 / lost_prod_45 / lost_prod_50 / lost_prod_55 / lost_prod_60
+        # 5min / hour / day / week / month
+    
+        r=session.get(self.urlTimeSeries)
+        soup = BeautifulSoup(r.content, "lxml")
+        
+        self.ts = soup.findAll('table', attrs={"class": "inlayTable"})[0]
+        
+        self.attrs = {
+                      0: [None,  'id',                           0],
+                      1: [None,  'time',                         1],
+                      2: [None,  str(quantity),                  2]}
+        
+        self.station_ID()
+        self.timeSeries()
+        
+    def __getitem__(self, key):
+        if key in self.attrs:
+            return self.attrs[key][0]
+    
+    def __setitem__(self, key, item):
+        if key in self.attrs:
+            self.attrs[key][0] = item
+    def station_ID(self):
+        self.attrs[0][0] = str(self.id)
+        
+    def timeSeries(self):
+        table = self.ts
+        tbody = table.findAll('tbody')[0]
+        trs = tbody.findAll('tr')
+        idList = []
+        quantityList = []
+        for tr in trs:
+            td = tr.findAll('td')[:2]
+            idList.append(str(td[0].string))
+            quantityList.append(str(td[1].string))
+        self.attrs[1][0] = idList
+        self.attrs[2][0] = quantityList
+            
