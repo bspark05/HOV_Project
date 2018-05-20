@@ -38,8 +38,8 @@ requests, bs4, time, datetime
 ------|:------
 session|*requests.sessions.Session* 
  ||Username of a PeMS account for login
-pw|*string*
- || Password for the username
+id|*string*
+ || Station ID of interest
  ||
 **Return**| |
 0| [Value,  'Station ID',                      0]
